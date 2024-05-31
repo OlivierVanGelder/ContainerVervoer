@@ -14,10 +14,7 @@ namespace Containervervoer
         private void Submit_Click(object sender, EventArgs e)
         {
             ErrorLabel.Text = string.Empty;
-            Ship ship = new Ship();
-            ship.Length = Convert.ToInt32(LengthInput.Value);
-            ship.Width = Convert.ToInt32(WidthInput.Value);
-            ship.MakeShip();
+            Ship ship = new Ship(Convert.ToInt32(LengthInput.Value), Convert.ToInt32(WidthInput.Value));
             FillContainers(ship, Convert.ToInt32(normalWeightInput.Value), Convert.ToInt32(valuableWeightInput.Value), Convert.ToInt32(coolableWeightInput.Value), Convert.ToInt32(BothInput.Value));
             if (!ship.SortContainers())
                 ShowSizeErrorMessage();

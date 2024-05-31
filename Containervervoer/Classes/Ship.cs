@@ -9,6 +9,13 @@ namespace Containervervoer.Classes
         public int Length { get; set; }
         public int Width { get; set; }
 
+        public Ship(int length, int width) 
+        {
+            Length = length;
+            Width = width;
+            MakeShip();
+        }
+
         public void ClearContainers() => containers.Clear();
 
         public void AddContainer(Container container) => containers.Add(container);
@@ -86,14 +93,14 @@ namespace Containervervoer.Classes
             return maxweigth;
         }
 
-        public bool CheckTotalWeigth(List<Container> containers, List<Row> rows)
+        public bool CheckEnoughWeigth()
         {
             int totalweigth = 0;
 
             foreach (Container container in containers)
                 totalweigth += container.Weight;
 
-            if (totalweigth < (CalculateMaxWeight(rows)/2))
+            if (totalweigth < (CalculateMaxWeight(Rows)/2))
                 return false;
 
             return true;
