@@ -25,8 +25,10 @@ namespace Containervervoer.Classes
             return Containers.Sum(c => c.Weight);
         }
 
-        public bool TryAdd(Container container, Func<int, int, int, bool> checkEmptySurrounding)
-        {            
+        public bool TryAdd(Container container, Func<int, int, int, bool> checkEmptySurrounding, Func<int, int, int, bool> checkValuable)
+        {
+            if (!checkValuable(RowIndex, StackIndex, Containers.Count))
+                return false;
             if (Containers.LastOrDefault()?.Valuable ?? false)
             {
                 if (container.Valuable)

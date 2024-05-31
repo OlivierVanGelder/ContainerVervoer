@@ -36,11 +36,11 @@ namespace Containervervoer.Classes
         {
             if (container.Coolable)
             {
-                return Rows[0].AddContainer(container, CheckSurrounding);
+                return Rows.First().AddContainer(container, CheckSurrounding, CheckValuable);
             }
-            foreach (Row row in Rows.Reverse<Row>())
+            foreach (Row row in Rows.Skip(1).Append(Rows.First()))
             {
-                if (row.AddContainer(container, CheckSurrounding))
+                if (row.AddContainer(container, CheckSurrounding, CheckValuable))
                     return true;
             }
             return false;
@@ -55,8 +55,6 @@ namespace Containervervoer.Classes
             return false;
         }
 
-
-        // implementeer deze functie in de row class
         public bool CheckValuable(int row, int stack, int spot)
         {
             var frontContainerValuable = ContainerAt(row - 1, stack, spot)?.Valuable ?? false;
