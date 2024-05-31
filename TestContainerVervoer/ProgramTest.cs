@@ -1,5 +1,6 @@
 using Containervervoer.Classes;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace TestContainerVervoer
 {
@@ -7,7 +8,7 @@ namespace TestContainerVervoer
     public class ProgramTest
     {
         [TestMethod]
-        public void CheckShipWeigthInValid()
+        public void CheckShipWeigthFunctionInValid()
         {
             // Arange
             Ship ship = new Ship(5, 4);
@@ -22,7 +23,7 @@ namespace TestContainerVervoer
 
 
         [TestMethod]
-        public void CheckShipWeigthValid()
+        public void CheckShipWeigthFunctionValid()
         {
             // Arange
             Ship ship = new Ship(3, 4);
@@ -37,7 +38,7 @@ namespace TestContainerVervoer
         }
 
         [TestMethod]
-        public void CheckSurroundingSpace()
+        public void CheckSurroundingFunction()
         {
             // Arange
             Ship ship = new Ship(3,1);
@@ -51,6 +52,21 @@ namespace TestContainerVervoer
             Assert.IsTrue(ship.CheckSurrounding(1,0,2));
         }
 
+        [TestMethod]
+        public void CheckNothingOnTopOfValuable()
+        {
+            // Arange
+            Ship ship = new Ship(3, 2);
+            FillShipWithWeight(ship, 800, 0, 4, 30, 31);
+
+            // Act
+            ship.SortContainers();
+            DebugShip(ship);
+
+            // Assert
+            Assert.IsTrue(CheckShipValuablesStacked(ship));
+        }
+
         void FillShipWithWeight(Ship ship, int weight, int coolableCount, int valuableCount, int minimumWeight, int maximumWeight)
         {
             Random random = new();
@@ -61,6 +77,11 @@ namespace TestContainerVervoer
                 ship.AddContainer(container);
                 totalWeight += container.Weight;
             }
+        }
+
+        bool CheckShipValuablesStacked(Ship ship)
+        {
+            return ship.Rows.All(r => r.stacks.All(s => s.Containers.SkipLast(1).All(c => !c.Valuable)));
         }
 
         void DebugShip(Ship ship)
