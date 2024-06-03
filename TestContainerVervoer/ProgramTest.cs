@@ -1,6 +1,5 @@
 using Containervervoer.Classes;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace TestContainerVervoer
 {
@@ -41,7 +40,7 @@ namespace TestContainerVervoer
         public void CheckSurroundingFunction()
         {
             // Arange
-            Ship ship = new Ship(3,1);
+            Ship ship = new Ship(3, 1);
             FillShipWithWeight(ship, 300, 3, 0, 30, 31);
 
             //Act
@@ -49,7 +48,22 @@ namespace TestContainerVervoer
             DebugShip(ship);
 
             //Assert
-            Assert.IsTrue(ship.CheckSurrounding(1,0,2));
+            Assert.IsTrue(ship.CheckSurrounding(1, 0, 2));
+        }
+
+        [TestMethod]
+        public void CheckValuableAccessibility()
+        {
+            // Arange
+            Ship ship = new Ship(8, 1);
+            FillShipWithWeight(ship, 850, 0, 5, 30, 31);
+
+            //Act
+            ship.SortContainers();
+            DebugShip(ship);
+
+            //Assert
+            Assert.IsTrue(CheckValuablesAccessible(ship));
         }
 
         [TestMethod]
@@ -67,6 +81,21 @@ namespace TestContainerVervoer
             Assert.IsTrue(CheckShipValuablesStacked(ship));
         }
 
+        [TestMethod]
+        public void CheckCoolableFirstRow()
+        {
+            // Arange
+            Ship ship = new Ship(3, 2);
+            FillShipWithWeight(ship, 800, 3, 2, 30, 31);
+
+            // Act
+            ship.SortContainers();
+            DebugShip(ship);
+
+            // Assert
+            Assert.IsTrue(CheckCoolablesInFirstRow(ship));
+        }
+
         void FillShipWithWeight(Ship ship, int weight, int coolableCount, int valuableCount, int minimumWeight, int maximumWeight)
         {
             Random random = new();
@@ -77,6 +106,16 @@ namespace TestContainerVervoer
                 ship.AddContainer(container);
                 totalWeight += container.Weight;
             }
+        }
+
+        bool CheckValuablesAccessible(Ship ship)
+        {
+            return ship.Rows.All(r => r.stacks.Where(s => s.Containers.LastOrDefault()?.Valuable ?? false).All(s => ship.CheckSurrounding(s.RowIndex, s.StackIndex, s.Containers.Count - 1)));
+        }
+
+        bool CheckCoolablesInFirstRow(Ship ship)
+        {
+            return ship.Rows.Skip(1).All(r => r.stacks.All(s => s.Containers.All(c => !c.Coolable)));
         }
 
         bool CheckShipValuablesStacked(Ship ship)
