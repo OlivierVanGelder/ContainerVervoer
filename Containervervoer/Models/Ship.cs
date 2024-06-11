@@ -34,9 +34,9 @@ namespace Containervervoer.Classes
             }
         }
 
-        public bool SortContainers()
+        public bool OrganizeContainers()
         {
-            return containers.OrderByDescending(c => c.Valuable).All(SortContainer);
+            return containers.OrderByDescending(c => c.Valuable).All(predicate: SortContainer);
         }
 
         private bool SortContainer(Container container)

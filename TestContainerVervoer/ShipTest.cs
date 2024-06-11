@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace TestContainerVervoer
 {
     [TestClass]
-    public class ProgramTest
+    public class ShipTest
     {
         [TestMethod]
         public void CheckShipWeigthFunctionInValid()
@@ -14,7 +14,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 1200, 6, 4, 30, 31);
 
             // Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
 
             // Assert
             Assert.IsFalse(ship.CheckEnoughWeigth());
@@ -29,7 +29,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 1200, 6, 4, 30, 31);
 
             // Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
             DebugShip(ship);
 
             // Assert
@@ -44,7 +44,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 300, 3, 0, 30, 31);
 
             //Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
             DebugShip(ship);
 
             //Assert
@@ -59,7 +59,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 850, 0, 5, 30, 31);
 
             //Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
             DebugShip(ship);
 
             //Assert
@@ -74,7 +74,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 800, 0, 4, 30, 31);
 
             // Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
             DebugShip(ship);
 
             // Assert
@@ -89,7 +89,7 @@ namespace TestContainerVervoer
             FillShipWithWeight(ship, 800, 3, 2, 30, 31);
 
             // Act
-            ship.SortContainers();
+            ship.OrganizeContainers();
             DebugShip(ship);
 
             // Assert

@@ -16,7 +16,7 @@ namespace Containervervoer
             ErrorLabel.Text = string.Empty;
             Ship ship = new Ship(Convert.ToInt32(LengthInput.Value), Convert.ToInt32(WidthInput.Value));
             FillContainers(ship, Convert.ToInt32(normalWeightInput.Value), Convert.ToInt32(valuableWeightInput.Value), Convert.ToInt32(coolableWeightInput.Value), Convert.ToInt32(BothInput.Value));
-            if (!ship.SortContainers())
+            if (!ship.OrganizeContainers())
                 ShowSizeErrorMessage();
             DrawShip(ship);
         }
@@ -86,7 +86,7 @@ namespace Containervervoer
             {
                 Container container = new Container();
 
-                if (weight >= container.STANDARD_MAX_WEIGHT - container.STANDARD_WEIGHT)
+                if (container.WeightExeeds(weight))
                 {
                     weight -= (container.STANDARD_MAX_WEIGHT - container.STANDARD_WEIGHT);
                     ship.AddContainer(new Container() { Weight = container.STANDARD_MAX_WEIGHT, Coolable = coolable, Valuable = valuable });
@@ -97,6 +97,11 @@ namespace Containervervoer
                     weight = 0;
                 }
             }
+        }
+
+        private void ContainerTransport_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

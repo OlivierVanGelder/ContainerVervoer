@@ -36,6 +36,8 @@
             ValuableWeightLable = new Label();
             CoolableWeightLabel = new Label();
             groupBox1 = new GroupBox();
+            BothInput = new NumericUpDown();
+            BothLabel = new Label();
             label3 = new Label();
             label2 = new Label();
             LengthInput = new NumericUpDown();
@@ -44,15 +46,13 @@
             ExplenationLabel = new Label();
             ShipLayoutPanel = new FlowLayoutPanel();
             ErrorLabel = new Label();
-            BothLabel = new Label();
-            BothInput = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)normalWeightInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)valuableWeightInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)coolableWeightInput).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)BothInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LengthInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)WidthInput).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)BothInput).BeginInit();
             SuspendLayout();
             // 
             // Submit
@@ -137,6 +137,23 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             // 
+            // BothInput
+            // 
+            BothInput.Location = new Point(152, 166);
+            BothInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            BothInput.Name = "BothInput";
+            BothInput.Size = new Size(113, 27);
+            BothInput.TabIndex = 12;
+            // 
+            // BothLabel
+            // 
+            BothLabel.AutoSize = true;
+            BothLabel.Location = new Point(103, 168);
+            BothLabel.Name = "BothLabel";
+            BothLabel.Size = new Size(43, 20);
+            BothLabel.TabIndex = 11;
+            BothLabel.Text = "Both:";
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -211,23 +228,6 @@
             ErrorLabel.Size = new Size(0, 38);
             ErrorLabel.TabIndex = 12;
             // 
-            // BothLabel
-            // 
-            BothLabel.AutoSize = true;
-            BothLabel.Location = new Point(103, 168);
-            BothLabel.Name = "BothLabel";
-            BothLabel.Size = new Size(43, 20);
-            BothLabel.TabIndex = 11;
-            BothLabel.Text = "Both:";
-            // 
-            // BothInput
-            // 
-            BothInput.Location = new Point(152, 166);
-            BothInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            BothInput.Name = "BothInput";
-            BothInput.Size = new Size(113, 27);
-            BothInput.TabIndex = 12;
-            // 
             // ContainerTransport
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -241,14 +241,15 @@
             MaximizeBox = false;
             Name = "ContainerTransport";
             Text = "ContainerVervoer";
+            Load += ContainerTransport_Load;
             ((System.ComponentModel.ISupportInitialize)normalWeightInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)valuableWeightInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)coolableWeightInput).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)BothInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)LengthInput).EndInit();
             ((System.ComponentModel.ISupportInitialize)WidthInput).EndInit();
-            ((System.ComponentModel.ISupportInitialize)BothInput).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
